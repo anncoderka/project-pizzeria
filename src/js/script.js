@@ -74,11 +74,11 @@
       const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       clickableTrigger.addEventListener('click', function (event) {
         event.preventDefault();
-          const activeProduct = document.querySelector(select.all.menuProductsActive);
-          if (activeProduct && activeProduct !== thisProduct.element) {
-            activeProduct.classList.remove(classNames.menuProduct.wrapperActive);            
-          }
-          thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        const activeProduct = document.querySelector(select.all.menuProductsActive);
+        if (activeProduct && activeProduct !== thisProduct.element) {
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        }
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
   }
