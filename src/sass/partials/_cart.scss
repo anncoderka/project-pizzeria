@@ -65,10 +65,19 @@
         height: ($base-size * 2);
       }
 
-      &:hover .btn-quantity--lt {
-        opacity: 1;
+      .btn-quantity {
+        opacity: 0;
+        background-color: white;
+        color: red;
+        border: 0;
       }
 
+      &:hover .btn-quantity {
+        opacity: 1;
+        background-color: white;
+        color: red;
+        border: 0;
+      }
     }
 
   }
@@ -83,6 +92,8 @@
 
     i {
       font-size: 14px;
+      color: red;
+      padding: 2px;
     }
 
     li {

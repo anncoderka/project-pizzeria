@@ -135,36 +135,32 @@
 
       </article> <!-- .product -->
     </script>
+
     <script id="template-cart-product" type="text/x-handlebars-template">
       <div>
-        <table style="width:100%">
-          <tr>
-            <td>
-              <input type="text" id="cart-amount" name="cart-amount" value="{{amount}}"
-                size="1" class="cart-input">
-            </td>
-            <td>
-              <div class="card-name">
-                <b>{{ name }} ${{ priceSingle }}</b>
-              </div>
-              <div class="cart-params">
-                {{#each params as |param paramId|}}
-                <strong>{{param.label}}:</strong>
-                  {{#each options as |option|}}
-                    {{ option }},
-                  {{/each}}
-                  <br>
+          <li>
+            <div class="widget-amount"> <!-- widget-amount -->
+              <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
+              <input type="text" name="amount" value="{{amount}}">
+              <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
+            </div>
+            <div class="cart__product-name">
+              <b>{{ name }}</b>
+              <br>
+              {{#each params as |param paramId|}}
+              <strong>{{param.label}}:</strong>
+                {{#each options as |option|}}
+                  {{ option }},
                 {{/each}}
-              </div>
-            </td>
-            <td>
-              <i class="fas fa-pen cart-icon-red cart-pen-icon"></i>
-            </td>
-            <td>
-              <i class="fas fa-trash-alt cart-icon-red"></i>
-            </td>
-          </tr>
-        </table>
+                <br>
+              {{/each}}
+            </div>
+            <div>$<span>{{ priceSingle }}</span></div>
+            <div class="cart__action-buttons">
+              <i id="cart-edit" class="fas fa-pen"></i>
+              <i id="cart-remove" class="fas fa-trash-alt"></i>
+            </div>
+          </li>
       </div>
     </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
