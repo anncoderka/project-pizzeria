@@ -39,8 +39,8 @@
     cartProduct: {
       edit: '#cart-edit',
       remove: '#cart-remove',
-      price: '#card-price',
-      amountWidget: '#cart-amountWidget'
+      price: '#cart-price',
+      amountWidget: '.widget-amount'
     }
   };
 
