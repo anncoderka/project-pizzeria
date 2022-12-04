@@ -10,8 +10,7 @@
     },
     "rules": {
         "indent": [
-            "error",
-            2
+            "off"
         ],
         "linebreak-style": [
             "off"
