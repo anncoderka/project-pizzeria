@@ -5,7 +5,6 @@ import CartProduct from './CartProduct.js';
 class Cart {
     constructor(element) {
         const thisCart = this;
-        console.log('*** Cart constructor ***');
         thisCart.products = [];
         thisCart.getElements(element);
         thisCart.initActions();
@@ -55,7 +54,6 @@ class Cart {
         for (let prod of thisCart.products) {
             payload.products.push(prod.getData());
         }
-        console.log('payload', payload);
         const options = {
             method: 'POST',
             headers: {
@@ -99,12 +97,6 @@ class Cart {
         } else {
             thisCart.totalPrice = 0;
         }
-        console.log('*** update ***');
-        console.log('totalPrice', thisCart.totalPrice);
-        console.log('deliveryFee', thisCart.deliveryFee);
-        console.log('subtotalPrice', subtotalPrice);
-        console.log('liczba produktow', thisCart.products.length);
-
         thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
         thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
         thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;

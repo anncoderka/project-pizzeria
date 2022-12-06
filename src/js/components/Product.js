@@ -44,7 +44,6 @@ class Product {
     }
     initOrderForm() {
         const thisProduct = this;
-        console.log('*** initOrderForm ***');
         thisProduct.form.addEventListener('submit', function (event) {
             event.preventDefault();
             thisProduct.processOrder();
@@ -65,7 +64,6 @@ class Product {
     }
     processOrder() {
         const thisProduct = this;
-        console.log('*** processOrder ***');
         const formData = utils.serializeFormToObject(thisProduct.form);
         let price = thisProduct.data.price;
 
