@@ -56,13 +56,13 @@ class Booking {
                     bookingResponse.json(),
                     eventsCurrentResponse.json(),
                     eventsRepeatResponse.json(),
-                ])
+                ]);
             })
             .then(function([bookings, eventsCurrent, eventsRepeat]){
                 console.log(bookings);
                 console.log(eventsCurrent);
                 console.log(eventsRepeat);
-            })
+            });
     }
     render(element) {
         const thisBooking = this;
