@@ -7,6 +7,7 @@ import HourPicker from './HourPicker.js';
 class Booking {
     constructor(element) {
         const thisBooking = this;
+        thisBooking.selectedTable;
         thisBooking.render(element);
         thisBooking.initWidgets();
         thisBooking.getData();
@@ -32,13 +33,11 @@ class Booking {
                 endDateParam,
             ],
         };
-        console.log('params',params);
         const urls = {
             booking:        settings.db.url + '/' + settings.db.booking + '?' + params.booking.join('&'),
             eventsCurrent:  settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent.join('&'),
             eventsRepeat:   settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat.join('&'),
         };
-        console.log('urls', urls);
         Promise.all([
             fetch(urls.booking),
             fetch(urls.eventsCurrent),
@@ -56,10 +55,6 @@ class Booking {
                 ]);
             })
             .then(function([bookings, eventsCurrent, eventsRepeat]){
-                console.log(bookings);
-                console.log(eventsCurrent);
-                console.log(eventsRepeat);
-
                 thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
             });
     }
@@ -78,9 +73,6 @@ class Booking {
         const minDate = thisBooking.datePickerWidget.minDate;
         const maxDate = thisBooking.datePickerWidget.maxDate;
 
-        console.log('minDate', minDate);
-        console.log('maxDate', maxDate);
-
         for (let item of eventsRepeat) {
             if (item.repeat == 'daily') {
                 for (let loopDate = minDate; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)){
@@ -88,7 +80,6 @@ class Booking {
                 }
             }
         }
-        console.log('thisBooking.booked', thisBooking.booked);
         thisBooking.updateDOM();
     }
     makeBooked(date, hour, duration, table) {
@@ -114,7 +105,6 @@ class Booking {
         thisBooking.hour = utils.hourToNumber(thisBooking.hourPickerWidget.value);
 
         let allAvailable = false;
-
         if (
             typeof thisBooking.booked[thisBooking.date] == 'undefined'
             ||
@@ -122,13 +112,12 @@ class Booking {
         ) {
             allAvailable = true;
         }
-
         for(let table of thisBooking.dom.tables) {
             let tableId = table.getAttribute(settings.booking.tableIdAttribute);
             if (!isNaN(tableId)){
                 tableId = parseInt(tableId);
             }
-            if(
+            if (
                 !allAvailable
                 &&
                 thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
@@ -150,6 +139,7 @@ class Booking {
         thisBooking.dom.datePicker = document.querySelector(select.widgets.datePicker.wrapper);
         thisBooking.dom.hourPicker = document.querySelector(select.widgets.hourPicker.wrapper);
         thisBooking.dom.tables = document.querySelectorAll(select.booking.tables);
+        thisBooking.dom.floorPlan = thisBooking.dom.wrapper.querySelector(select.booking.floorPlan);
     }
     initWidgets() {
         const thisBooking = this;
@@ -161,13 +151,45 @@ class Booking {
         
         thisBooking.dom.peopleAmount.addEventListener('click', function () {
             console.log('peopleAmount widget clicked');
+            thisBooking.unselectTable();
         });
         thisBooking.dom.hoursAmount.addEventListener('click', function () {
             console.log('hoursAmount widget clicked');
+            thisBooking.unselectTable();
         });
         thisBooking.dom.wrapper.addEventListener('updated', function () {
+            thisBooking.unselectTable();
             thisBooking.updateDOM();
         });
+        thisBooking.dom.floorPlan.addEventListener('click', function (event) {
+            thisBooking.initTables(event);
+        });
+    }
+    unselectTable() {
+        const thisBooking = this;
+        for (let table of thisBooking.dom.tables) {
+            table.classList.remove('selected');
+        }
+        thisBooking.selectedTable = 'undefined';
+    }
+    initTables(event) {
+        const thisBooking = this;
+
+        if (event.target.classList.contains('table')){
+            const isTableBooked = event.target.classList.contains('booked');
+            if (isTableBooked) {
+                alert('Stolik niedostępny.');
+            } else {
+                const clickedTable = event.target.getAttribute('data-table');
+                if (thisBooking.selectedTable == clickedTable) {
+                    thisBooking.unselectTable();
+                } else {
+                    thisBooking.unselectTable();
+                    event.target.classList.add('selected');
+                    thisBooking.selectedTable = clickedTable;
+                }
+            }
+        }
     }
 }
 

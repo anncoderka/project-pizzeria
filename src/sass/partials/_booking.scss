@@ -171,7 +171,11 @@
         background: $color-dark;
         opacity: 0.4;
       }
-
+    }
+    
+    &.selected {
+      background: green;
+      border: 3px solid black;
     }
   }
 
