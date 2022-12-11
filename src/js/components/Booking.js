@@ -178,7 +178,7 @@ class Booking {
         for (let table of thisBooking.dom.tables) {
             table.classList.remove('selected');
         }
-        thisBooking.selectedTable = 'undefined';
+        thisBooking.selectedTable = undefined;
     }
     initTables(event) {
         const thisBooking = this;
