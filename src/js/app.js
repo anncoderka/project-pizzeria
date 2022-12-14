@@ -75,7 +75,7 @@ const app = {
   initHome() {
     const thisApp = this;
     const homeElem = document.querySelector(select.containerOf.home);
-    thisApp.booking = new Home(homeElem);
+    thisApp.homeElem = new Home(homeElem, thisApp);
   },
   init: function () {
     const thisApp = this;
@@ -88,4 +88,3 @@ const app = {
 };
 
 app.init();
-

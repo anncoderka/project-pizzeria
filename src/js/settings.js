@@ -51,6 +51,9 @@ export const select = {
         address: 'input[name="address"]',
         starters: 'input[type="checkbox"]',
     },
+    home: {
+        homeHeader: '.home-header'
+    },
     nav: {
         links: '.main-nav a',
     },
