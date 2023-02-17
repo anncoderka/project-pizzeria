@@ -20,9 +20,13 @@ class Home {
         const thisHome = this;
         thisHome.dom.homeHeader.addEventListener('click', function(event){
             event.preventDefault();
+
+
             let pageId = event.target.offsetParent.getAttribute('id-data');
+            console.log('Click event', pageId);
             if (pageId) {
                 thisHome.app.activatePage(pageId);
+                window.location.hash = '#/' + pageId;
             }
         });
     }

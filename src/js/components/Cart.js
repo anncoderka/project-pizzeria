@@ -96,6 +96,8 @@ class Cart {
             thisCart.totalPrice = subtotalPrice + thisCart.deliveryFee;
         } else {
             thisCart.totalPrice = 0;
+            console.log('deliveryFee zero');
+            thisCart.deliveryFee = 0;
         }
         thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
         thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;

@@ -18,6 +18,9 @@ const app = {
       }
     }
     thisApp.activatePage(pageMatchingHash);
+
+    console.log('pageMatchingHash', pageMatchingHash);
+
     for (let link of thisApp.navLinks) {
       link.addEventListener('click', function(event) {
         const clickedElement = this;
@@ -29,6 +32,10 @@ const app = {
     }
   },
   activatePage: function(pageId) {
+
+
+    console.log('app activatePage', pageId);
+
     const thisApp = this;
     for (let page of thisApp.pages) {
       page.classList.toggle(classNames.pages.active, page.id == pageId);
